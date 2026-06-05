@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let question = prompt("do you want to put a student in here: (y/n)");
+    if(question === "y"){
+        let students = [];
+        let n = parseInt(prompt("how many students do you want in here?"));
+        for(let i = 0; i < n; i++){
+            let name = prompt("Enter your name: ");
+            let mark = prompt("enter the marks of the student: ");
+            students.push({
+                names: name,
+                marks: parseInt(mark)
+            })
+        }
+        students.forEach(student => {
+            console.log(student.names + " - " + student.marks);
+        });
+        let avg = 0, max = students[0], min = students[0];
+        students.forEach(student => {
+            avg += student.marks;
+        })
+        console.log("Average: " + avg/n)
+        students.forEach(student => {
+            if(max.marks < student.marks){
+                max = student;
+            }
+        });
+        console.log("Max: " + max.names + " got " + max.marks);
+        students.forEach(student => {
+            if(min.marks > student.marks){
+                min = student;
+            }
+        })
+        console.log("Min: " + min.names + " got "+ min.marks);
+    }else{
+        console.log("nice");
+    }
+</script>
+</html>

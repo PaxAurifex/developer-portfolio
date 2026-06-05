@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hour 5: The Box Model</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .box {
+            width: 300px;
+            background-color: #3498db;
+            color: white;
+            border: 5px solid #2c3e50;
+        }
+
+        .padding-box {
+            padding: 40px; 
+        }
+
+        .margin-box {
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+        
+    </style>
+</head>
+<body>
+
+    <h1>Understanding the Box Model</h1>
+    <p>Look at how the CSS properties change the physical footprint of these two identical divs.</p>
+
+    <div class="box padding-box">
+        <h2>I am the Padding Box</h2>
+        <p>I have 40px of padding. Notice how much breathing room I have inside my border? But my total visible size on the screen has grown!</p>
+    </div>
+
+    <div class="box margin-box">
+        <h2>I am the Margin Box</h2>
+        <p>I have 0px of padding, so my text is squished against the walls. However, I have a 50px margin on my top and left, pushing me away from everything else.</p>
+    </div>
+
+</body>
+</html>

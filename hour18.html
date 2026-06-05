@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <label for="wea">Enter the weather data: </label>
+        <input id="wea" type="text" name="wea" required>
+        <button id="">submit</button> -->
+</body>
+<script>
+    // const location = document.getElementById(wea);
+    let city = prompt("Enter the location you want to know the weather of: ");
+    async function getCoordinates(){
+        const url = `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`;
+
+        const response = await fetch(url)
+        const data = await response.json()
+
+        if(data.results && data.results.length > 0){
+                let lat = data.results[0].latitude;
+                let lon = data.results[0].longitude;
+                    const url2 = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`;
+                    const response2 = await fetch(url2);
+                    const data2 = await response2.json()
+                    if(data2 === null){
+                        console.log("something went wrong");
+                    }else{
+                        console.log("the temperature of your current location is:", data2.current_weather.temperature)
+                    }
+        }else{
+            console.log("location not found!")
+        }
+    }
+    getCoordinates()
+    
+</script>
+</html>

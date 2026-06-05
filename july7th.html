@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hello World</title>
+  <link rel="stylesheet" href="pro.css">
+</head>
+<body>
+  <form action="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter your username here" />
+  </form>
+  <a href = "https://google.com">click here to go to google</a>
+
+  <ol>
+    <li>aman</li>
+    <li>John Doe</li>
+  </ol>
+  <div class="im">
+    <img src="https://m.media-amazon.com/images/M/MV5BNmM5NjU2MWItOGQzYi00ODgxLWFiNTQtYTg1M2UwODQ1NTE2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="this is an image of the phantom troupe from hunter x hunter">
+  </div>
+  <br><br>
+  <form action="" method ="POST"></form>
+
+  <input type = "text">
+  <input type = "email">
+  <input type = "radio">
+  <input type = "checkbox">
+  <input type = "date">
+
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName">  
+
+  <label for="address"> Put your adress here:</label>
+  <textarea id="address" rows="4" cols="30"></textarea>
+
+  <select>
+    <option value="bca">BCA</option>
+    <option value="btech">B.tech</option>
+  </select>
+
+  <button id="mybutton" type="sumbit">submit</button>
+
+  <footer class="foot">
+    <p>&copy; 2026 Aman</p>
+  </footer>
+
+  <input name="first name" value="firstname">
+
+  <script>
+    function reverseString(str){
+      let reverse = "";
+      for(let i = str.length - 1; i >= 0; i--){
+        reverse = reverse + str[i];
+      }
+      return reverse;
+    }
+
+    const foot = document.querySelector(".foot");
+
+    console.log(reverseString("backend"));
+
+    mybutton.addEventListener("click", function(){
+      mybutton.style.color = "red";
+      mybutton.textContent = "SUBMITTED"
+    })
+
+    foot.textContent = "new title unlocked!";
+    foot.style.color = "blue";
+    foot.style.display = "non";
+
+    const im = document.querySelector(".im");
+    im.addEventListener("mouseover", function(){
+      im.style.height = "510px";
+    })
+    im.addEventListener("mouseleave", function(){
+      im.style.height = "500px";
+    })
+
+  </script>
+
+</body>
+</html>

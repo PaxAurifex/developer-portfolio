@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hour 8: DOM Manipulation</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #2c3e50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .tracker-card {
+            background-color: #34495e;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 10px 10px 0px 0px rgba(0,0,0,0.3);
+            width: 350px;
+        }
+
+        /* Notice we give these IDs so JS can easily grab them */
+        #session-count {
+            font-size: 80px;
+            margin: 20px 0;
+            color: #e74c3c;
+            font-weight: bold;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #add-btn { background-color: #2ecc71; color: white; }
+        #reset-btn { background-color: #95a5a6; color: white; }
+        
+        button:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+
+    <div class="tracker-card">
+        <h2>JLPT N2 Prep Tracker</h2>
+        <p>Target: July 2027</p>
+        
+        <div id="session-count">0</div>
+        
+        <p>Completed Pomodoro Blocks</p>
+
+        <div class="btn-group">
+            <button id="add-btn">Log Session</button>
+            <button id="reset-btn">Reset</button>
+        </div>
+        
+        <p id="milestone-msg" style="color: #f1c40f; display: none; margin-top: 20px;">
+            🔥 Elite pace! Deep work activated.
+        </p>
+    </div>
+
+    <script>
+        // 1. Setup our starting variable
+        let currentSessions = 0;
+
+        // 2. Select the HTML elements we need to manipulate
+        const countDisplay = document.getElementById("session-count");
+        const addBtn = document.getElementById("add-btn");
+        const resetBtn = document.getElementById("reset-btn");
+        const milestoneMsg = document.getElementById("milestone-msg");
+
+        // 3. Add an Event Listener for the 'Log Session' button
+        addBtn.addEventListener("click", function() {
+            // Increase the count
+            currentSessions = currentSessions + 1;
+            
+            // Update the HTML text
+            countDisplay.textContent = currentSessions;
+
+            // Conditional Logic: Show a message if they hit 4 sessions
+            if (currentSessions >= 4) {
+                milestoneMsg.style.display = "block"; // Change CSS to make it visible
+            }
+        });
+
+        // 4. Add an Event Listener for the 'Reset' button
+        resetBtn.addEventListener("click", function() {
+            // Reset the variable
+            currentSessions = 0;
+            
+            // Update the HTML
+            countDisplay.textContent = currentSessions;
+            
+            // Hide the milestone message again
+            milestoneMsg.style.display = "none";
+        });
+    </script>
+
+</body>
+</html>

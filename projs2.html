@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hour 9: The Event Loop</title>
+    <style>
+        /* CSS: Setting the vibe */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e2f;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .tracker-container {
+            background-color: #2a2a40;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        h2 { margin-top: 0; color: #a5b1c2; }
+        
+        /* The number display */
+        #ccv-display {
+            font-size: 80px;
+            font-weight: bold;
+            color: #ff5252;
+            margin: 20px 0;
+            text-shadow: 0 0 10px rgba(255, 82, 82, 0.3);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background-color: #4b6584;
+            color: white;
+            transition: 0.1s;
+        }
+
+        button:active {
+            transform: scale(1.22);
+        }
+
+        #btn-inc { background-color: #20bf6b; }
+        #btn-dec { background-color: #eb3b5a; }
+    </style>
+</head>
+<body>
+
+    <div class="tracker-container">
+        <h2>Pekora Live CCV</h2>
+        <div id="ccv-display">0</div>
+        
+        <div class="controls">
+            <button id="btn-dec">-</button>
+            <button id="btn-inc">+</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. The Variable (State)
+        // We use 'let' because this number will constantly change.
+        let currentCCV = 0;
+
+        // 2. The DOM Elements (Selecting what we need to touch)
+        const display = document.getElementById("ccv-display");
+        const incrementBtn = document.getElementById("btn-inc");
+        const decrementBtn = document.getElementById("btn-dec");
+
+        // 3. The Events (Listening and reacting)
+        
+        // Listen for the '+' click
+        incrementBtn.addEventListener("click", function() {
+            currentCCV = currentCCV + 500; // Simulate 500 viewers joining
+            display.textContent = currentCCV; // Paint it to the screen
+        });
+
+        // Listen for the '-' click
+        decrementBtn.addEventListener("click", function() {
+            // Logic check: Viewers can't drop below 0
+            if (currentCCV > 0) {
+                currentCCV = currentCCV - 500; // Simulate viewers leaving
+                display.textContent = currentCCV;
+            }
+        });
+    </script>
+
+</body>
+</html>
