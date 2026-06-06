@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        /* .item{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20%;
+            width: auto;
+            border: 2px solid black;    
+        } */
+    </style>
+</head>
+<body>
+    <div class="item">
+        <input id="task">
+        <button id="myButton" onclick="saveText()">save</button>
+        <ul id="list"></ul>
+
+    </div>
+    
+</body>
+<script>
+    let items = JSON.parse(localStorage.getItem("items")) || [];
+    displayNotes();
+    function saveText(){
+        let text = document.getElementById("task");
+        items.push(text.value);
+        localStorage.setItem(
+            "items",
+            JSON.stringify(items)
+        );
+        displayNotes();
+        text.value = "";
+    }
+    function displayNotes(){
+        let list = document.getElementById("list");
+        list.innerHTML = "";
+        items.forEach((item, index) => {
+            list.innerHTML += `
+            <li id="task-${index}">
+                <input type="checkbox"
+                onclick="completeTask(${index}, this)">
+                ${item}
+                <button onclick="deleteTask(${index}, this)">X</button>
+            </li>
+            `;
+        });
+    }
+    function completeTask(index, checkbox){
+        let task = document.getElementById(`task-${index}`)
+        if(checkbox.checked) {
+            task.style.textDecoration="line-through";
+        }else{
+            task.style.textDecoration="none";
+        }
+            
+    }
+    function deleteTask(index) {
+        let currentArray = JSON.parse(localStorage.getItem("items")) || [];
+
+        currentArray.splice(index, 1);
+
+        localStorage.setItem("items", JSON.stringify(currentArray));
+        items = currentArray;
+        displayNotes();
+    }
+
+</script>
+</html>
