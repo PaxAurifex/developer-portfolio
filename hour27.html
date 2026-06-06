@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS GRID PRACTICE</title>
+</head>
+<style>
+    body{
+        background-color: dimgrey;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+        flex-direction: column;
+        min-height: 100dvh; /* Dynamic viewport height ensures it works beautifully on mobile browsers */
+        margin: 0;
+    }
+    nav{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: black;
+        border-bottom: 1px solid white;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    header{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 100px;
+        font-size: xx-large;
+        border-bottom: 2px solid white;
+    }
+    .hero {
+        height: 80vh;
+    }
+    .logo{
+        color: blue;
+    }
+    .tags{
+        display: flex;
+        gap: 50px;
+    }
+    a:link, a:visited {
+        color: blue;
+    }
+    .main {
+    flex: 1; /* This forces the main content area to grow and fill all available empty space */
+    }
+    hr{
+        width: 100%;
+    }
+    .card-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-evenly;
+        
+    }
+    .card{
+        padding: 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        margin: 30px;
+        background-color: black;
+    }
+    footer{
+        border-top: 2px solid white;
+        background-color: black;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    @media (max-width: 768px) {
+        .card-container{
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+<body>
+    <nav>
+        <div class="logo">
+            <h1>LOGO</h1>
+        </div>
+        <div class="tags">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Pricing</a>
+        </div>
+        
+    </nav>
+    <section class="hero">
+        <header>
+            <h1>BUILD THE FUTURE</h1>
+            <P>one component at a time</P>
+        </header>
+        <br><br>
+        <main>
+            <div class="card-container">
+                <div class="card">
+                    <h3 style="color: blue;">Fast</h3>
+                    <p>Global edge network delivery.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: blue;">Scallable</h3>
+                    <p>Auto-scalling infrastructure.</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: blue;">Secure</h3>
+                    <p>End-to-end encryption standard.</p>
+                </div>
+            </div>
+        </main>
+    </section>
+    <footer>
+        <p>&copy;Aman sunar, 2026.LTD</p>
+    </footer>
+</body>
+</html>
