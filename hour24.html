@@ -4,16 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-    <style>
-        /* .item{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 20%;
-            width: auto;
-            border: 2px solid black;    
-        } */
-    </style>
 </head>
 <body>
     <div class="item">
@@ -43,8 +33,7 @@
         items.forEach((item, index) => {
             list.innerHTML += `
             <li id="task-${index}">
-                <input type="checkbox"
-                onclick="completeTask(${index}, this)">
+                <input type="checkbox" onclick="completeTask(${index}, this)">
                 ${item}
                 <button onclick="deleteTask(${index}, this)">X</button>
             </li>

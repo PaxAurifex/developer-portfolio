@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        flex-direction: column;
+        background-color: grey;
+
+    }
+    .card{
+        display: flex;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+        background-color: aliceblue;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .mynotes{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+        border: 2px solid black;
+        border-radius: 10px;
+        background-color: aliceblue;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    #mynote{
+        display: flex;
+        justify-content: space-around;
+        font-weight: bold;
+        font-size: large ;
+    }
+</style>
+<body>
+    <div class="card">
+        <label>Title:</label>
+        <input type="text" id="text">
+        <label>Content:</label>
+        <textarea id="note"></textarea>
+        <br>
+        <button onclick="saveNotes()">SAVE NOTE</button>
+    </div>
+    <br>
+    <div class="mynotes">
+        <p id="mynote">My Notes:</p>
+        <ul id="list"></ul>
+    </div>
+</body>
+<script>
+    let items = JSON.parse(localStorage.getItem("items")) || []
+    
+    displayNotes();
+    function saveNotes(){
+        const text = document.getElementById("text");
+        const note = document.getElementById("note");
+        const newNote = {
+            title: note.value,   
+            content: text.value
+        };
+        items.push(newNote);
+        localStorage.setItem(
+            "items",
+            JSON.stringify(items)
+        )
+        displayNotes();
+        text.value=""
+        note.value=""
+    }
+    function displayNotes(){
+        const list = document.getElementById("list")
+        list.innerHTML="";
+        
+        items.forEach((item, index) => {
+            const title = item.title || "";
+            const content = item.content || "";
+            list.innerHTML += `
+                <li id="note-${index}">
+                    <input type="checkbox" onclick="completeNote(${index}, this)">
+                    <strong>${content}</strong>: ${title}
+                    <button id="butt-${index}" onClick="deleteNote(${index}, this)">X</button>
+                </li>
+                
+            `;
+            list.style.fontSize="25px";
+        });
+    }
+    function completeNote(index, checkbox){
+        let list = document.getElementById(`note-${index}`)
+        if(checkbox.checked){
+            list.style.textDecoration="line-through"
+        }else{
+            list.style.textDecoration="none"
+        }
+    }
+    function deleteNote(index){
+        let currentArray = JSON.parse(localStorage.getItem("items")) || []
+        currentArray.splice(index, 1);
+        localStorage.setItem("items", JSON.stringify(currentArray));
+        items = currentArray;
+        displayNotes();
+    }
+</script>
+</html>
