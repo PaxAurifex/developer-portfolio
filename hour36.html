@@ -3,12 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First_React_Project</title>
+    <title>React Component Blueprint Todo</title>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .todo-container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 350px; }
+        .input-form { display: flex; gap: 10px; margin-bottom: 20px; }
+        .input-form input { flex: 1; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
+        .input-form button { padding: 8px 12px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        .task-item { display: flex; justify-content: space-between; align-items: center; padding: 10px; border-bottom: 1px solid #eee; }
+        .task-item button { background-color: #dc3545; color: white; border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; }
+    </style>
 </head>
 <body>
-    
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        // Destructuring useState from React object for convenience
+        const { useState } = React;
+
+        /* =========================================================
+           4. <TaskItem /> (Child 3 / The Card)
+           ========================================================= */
+        function TaskItem({ task, deleteTask }) {
+            return (
+                <li className="task-item">
+                    <span>{task.text}</span>
+                    <button onClick={() => deleteTask(task.id)}>X</button>
+                </li>
+            );
+        }
+
+        /* =========================================================
+           3. <TaskList /> (Child 2 / The Wrapper)
+           ========================================================= */
+        function TaskList({ tasks, deleteTask }) {
+            return (
+                <ul>
+                    {tasks.map((task) => (
+                        <TaskItem 
+                            key={task.id} 
+                            task={task} 
+                            deleteTask={deleteTask} 
+                        />
+                    ))}
+                </ul>
+            );
+        }
+
+        /* =========================================================
+           2. <TaskInput /> (Child 1 / The Form)
+           ========================================================= */
+        function TaskInput({ addTask }) {
+            // Local state to track characters typed in input box
+            const [text, setText] = useState("");
+
+            const handleSubmit = (e) => {
+                e.preventDefault(); // Prevents page reload
+                if (!text.trim()) return; // Don't add empty tasks
+                
+                addTask(text); // Execute parent prop function
+                setText(""); // Clear local input state
+            };
+
+            return (
+                <form className="input-form" onSubmit={handleSubmit}>
+                    <input 
+                        type="text" 
+                        placeholder="Enter a new task..." 
+                        value={text} 
+                        onChange={(e) => setText(e.target.value)}
+                    />
+                    <button type="submit">Add</button>
+                </form>
+            );
+        }
+
+        /* =========================================================
+           1. <App /> (The Parent / The Brain)
+           ========================================================= */
+        function App() {
+            // Main centralized state tree
+            const [tasks, setTasks] = useState([]);
+
+            // Logic to add a task object
+            const addTask = (taskText) => {
+                const newTask = {
+                    id: Date.now(), // Simple unique ID generation
+                    text: taskText
+                };
+                setTasks([...tasks, newTask]); // Update state with copy + new item
+            };
+
+            // Logic to remove a task object by ID filter
+            const deleteTask = (id) => {
+                const updatedTasks = tasks.filter(task => task.id !== id);
+                setTasks(updatedTasks);
+            };
+
+            return (
+                <div className="todo-container">
+                    <h1>Task Master</h1>
+                    {/* Passing addTask function down as a prop */}
+                    <TaskInput addTask={addTask} />
+                    {/* Passing tasks data array and deleteTask function as props */}
+                    <TaskList tasks={tasks} deleteTask={deleteTask} />
+                </div>
+            );
+        }
+
+        // Mount the system onto the root anchorage point
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+
 </body>
-<script>
-    <App />
-</script>
 </html>
